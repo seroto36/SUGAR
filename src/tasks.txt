@@ -1,0 +1,4 @@
+variables to free
+lc_cat
+box_cat
+intervals

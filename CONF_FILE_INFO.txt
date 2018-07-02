@@ -1,0 +1,64 @@
+################################################
+PARAMETERS FOR LIGHTCONE PROCESSING (CODE_OPT=LGC) 
+################################################
+
+MASK= Apply cuts in the final catalogue using a mangle geometry file ".ply".
+Libreries used for this goal are extracted from the MockFactory repertory
+
+RANDOM = Produce a final random catalogue reproducing properties of the final
+lightcone
+
+READ_HDF5 = Read input catalogues in HDF5 format (Assumed format in reader.c)
+
+READ_LC = Read a pre-constructed light-cone, if this is not set the code reads
+snapshots from Simulations
+
+PART_CAT = Construct catalogue from particle simulations, if this is not set, the
+code assumes simulations containing halos/galaxies
+
+#### Only one option can be set
+
+HAM = Apply Halo Abundance Matching (Rodr\'iguez-Torres et al. 2017)
+
+HOD = HAlo Occupation Distribution
+
+MODIFY_HAM = Modified HAM 5 parameters (Rodr\'iguez-Torres et al. 2016)
+
+DOWNSAMPLE = Random selection of objects to decrease the number
+density
+
+####### If any of these options are set, the code combine snapshots
+####### and constructs the light-cone taking all objects inside the volume
+
+COR_FUN = Compute the 2 point correlation function of the final
+catalogue.
+
+FIND_PAR = The code implements a grid rutine to find the best parameters
+to reproduce the correlation function of a diferent sample
+
+VAR_CUT = Select halos under a certain value of circular velocity (Vcirc by default)
+
+##########################################
+PARAMETERS FOR BOX PROCESSING (CODE_OPT=BOX) 
+##########################################
+
+HAM = Apply Halo Abundance Matching (Rodr\'iguez-Torres et al. 2017)
+
+HOD = HAlo Occupation Distribution
+
+MODIFY_HAM = Modified HAM 5 parameters (Rodr\'iguez-Torres et al. 2016)
+
+DOWNSAMPLE = Random selection of objects to decrease the number
+density
+
+####### If any of these options are set, the code combine snapshots
+####### and constructs the light-cone taking all objects inside the volume
+
+COR_FUN = Compute the 2 point correlation function of the final catalogue.
+
+READ_HDF5 = Read input catalogues in HDF5 format (Assumed format in reader.c)
+
+FIND_PAR = The code implements a grid rutine to find the best parameters
+to reproduce the correlation function of a diferent sample
+
+VAR_CUT = Select halos under a certain value of circular velocity (Vcirc by default)
