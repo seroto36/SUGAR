@@ -1,0 +1,9 @@
+OMEGA_M 0.307115
+OMEGA_L 0.692885
+HUBBLE_PAR 0.6777
+LBOX 1000.0
+ZBOX 0.55739
+NBAR 3.3e-4
+SCAT_HAM 0.43
+INFILE /home2/srodriguez/SkyUAM/input_samples/RST_MDPlanck/out.108.parent.h5
+OUTFILE /home2/srodriguez/SUGAR_output/temp/Box_ham_3.30e-4_z0.56_1.0
