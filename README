@@ -1,0 +1,16 @@
+--------------------------------------------------------------------
+-----------------------------  SUGAR   -------------------------------
+--------------------------------------------------------------------
+
+
+The Survey Generator code was developped by Sergio A. Rodríguez-Torres. If you use this code, please refer to
+
+Rodríguez-Torres, S. A., et al. 2016. The clustering of galaxies in the SDSS-III Baryon Oscillation Spectroscopic Survey: modelling the clustering and halo occupation distribution of BOSS CMASS galaxies in the Final Data Release. Monthly Notices of the Royal Astronomical Society 460, 1173.
+
+Mangle mask libraries are part of the MockFactory software created by Jeremy Tinker, Martin White, and Cameron McBride. I you used them, please refer to
+
+    https://github.com/mockFactory/QPM_mocks
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
