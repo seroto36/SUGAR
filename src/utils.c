@@ -309,7 +309,8 @@ void fill_sheels(hl_proxy *ham_px,lightcone lc_cat){
       continue;	
     float GAUSSRAN = gsl_ran_gaussian (rng, SCAT_HAM);
     ham_px[itemp].prx[idx[itemp]].pst = ii;
-    ham_px[itemp].prx[idx[itemp]].var = lc_cat.lc[ii].Vpeak*(1.0+GAUSSRAN);
+    ham_px[itemp].prx[idx[itemp]].var = pow(10,log10(lc_cat.lc[ii].Vpeak)+GAUSSRAN);
+    //ham_px[itemp].prx[idx[itemp]].var = lc_cat.lc[ii].Vpeak*(1.0+GAUSSRAN);
     idx[itemp]++;
   }
   
@@ -426,13 +427,21 @@ void write_ascii(lightcone dat){
 	    dat.lc[ii].Mv,dat.lc[ii].M200,dat.lc[ii].Rv,dat.lc[ii].Vmax,
 	    dat.lc[ii].Vpeak,dat.lc[ii].str_id,dat.lc[ii].id,dat.lc[ii].snapnum,
 	    dat.lc[ii].boxnum); 
-  }
+	    }
 
+  /*for(ii=0; ii<dat.np; ii++){
+    fprintf(fd,"%.6f %.6f %.6f %.6f %.5e %.6f %ld %ld %d %ld %.6f %.6f %.6f %.6f %.6f %.6f\n", \
+	    dat.lc[ii].ra,dat.lc[ii].dec,dat.lc[ii].rds,dat.lc[ii].zreal,
+	    dat.lc[ii].Mv,dat.lc[ii].Vmax,dat.lc[ii].str_id,dat.lc[ii].id,
+	    dat.lc[ii].snapnum, dat.lc[ii].boxnum,dat.lc[ii].vx,dat.lc[ii].vy,
+	    dat.lc[ii].vz,dat.lc[ii].M200,dat.lc[ii].Rv, dat.lc[ii].Vpeak); 
+	    }*/
+  
   
   /*for(ii=0; ii<dat.np; ii++){
     fprintf(fd,"%.6f %.6f %.6f %.6f\n", \
 	    dat.lc[ii].ra,dat.lc[ii].dec,dat.lc[ii].zreal,dat.lc[ii].rds);
-  }*/
+	    }*/
 
   fclose(fd);  
 }
@@ -614,7 +623,10 @@ void write_ascii_sel_box(box dat){
 		dat.bx[ii].Mv,dat.bx[ii].M200,dat.bx[ii].Rv,dat.bx[ii].Vmax,
 		dat.bx[ii].Vpeak,dat.bx[ii].str_id,dat.bx[ii].id,
 		dat.bx[ii].box_id);
-  
+  	/*fprintf(fd,"%ld %.6f %.6f %.6f %.6f %.6f %.6f %.5e %.6f %.5e %ld %.6f %.6f\n"
+		, dat.bx[ii].id,dat.bx[ii].x,dat.bx[ii].y,dat.bx[ii].z,dat.bx[ii].vx,
+		dat.bx[ii].vy,dat.bx[ii].vz,dat.bx[ii].Mv,dat.bx[ii].Rv,
+		dat.bx[ii].M200,dat.bx[ii].str_id,dat.bx[ii].Vpeak,dat.bx[ii].Vmax);*/  
 
   if(CSMF)
     for(ii=0; ii<dat.np; ii++)

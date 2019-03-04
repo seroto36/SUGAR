@@ -216,6 +216,7 @@ void assign_redshift_randomcat(lightcone lc_cat, ran_lc r_cat){
 	ii=0;
 	for(jj=0; jj<lc_cat.np;jj++){
 	  r_cat.lc[ii+kk*NSEL].rds=lc_cat.lc[jj].rds;
+	  r_cat.lc[ii+kk*NSEL].zreal=lc_cat.lc[jj].zreal;
 	  r_cat.lc[ii+kk*NSEL].wfkp=lc_cat.lc[jj].wfkp;
 	  ii++;
 	}
@@ -228,6 +229,7 @@ void assign_redshift_randomcat(lightcone lc_cat, ran_lc r_cat){
 	for(jj=0; jj<lc_cat.np;jj++)
 	  if(lc_cat.lc[jj].sel){
 	    r_cat.lc[ii+kk*NSEL].rds=lc_cat.lc[jj].rds;
+	    r_cat.lc[ii+kk*NSEL].zreal=lc_cat.lc[jj].zreal;
 	    r_cat.lc[ii+kk*NSEL].wfkp=lc_cat.lc[jj].wfkp;
 	    ii++;
 	  }
@@ -246,8 +248,8 @@ void write_random_ascii(ran_lc dat){
   for(ii=0; ii<dat.np; ii++)
     /*fprintf(fd,"%.6f %.6f %.6f %.6f\n", dat.lc[ii].ra,dat.lc[ii].dec,
       dat.lc[ii].rds,dat.lc[ii].wfkp);*/
-    fprintf(fd,"%.6f %.6f %.6f %.6f\n", dat.lc[ii].ra,dat.lc[ii].dec,
-	    dat.lc[ii].wfkp,dat.lc[ii].rds);
+    fprintf(fd,"%.6f %.6f %.6f %.6f %.6f\n", dat.lc[ii].ra,dat.lc[ii].dec,
+	    dat.lc[ii].rds,dat.lc[ii].wfkp,dat.lc[ii].zreal);
   fclose(fd);  
 }
 

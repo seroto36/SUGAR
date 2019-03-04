@@ -95,14 +95,14 @@ void downsampling(lightcone lc_cat){
 void select_ham_obj(hl_proxy *ham_px, lightcone lc_cat){
   long ii=0,jj=0,kk=0;
   if(FSAT==DEFAULT)
-    for(ii=0; ii<NPART; ii++)
+    for(ii=0; ii<NPART; ii++){
       for(jj=0; jj<ham_px[ii].nsel;jj++){
 	kk=ham_px[ii].prx[jj].pst;
 	float zobs = lc_cat.lc[kk].rds;
 	lc_cat.lc[kk].sel = TRUE;
 	lc_cat.lc[kk].wfkp=1.0/(1.0+P0*number_density(zobs));
 	NSEL++;
-      }
+      }}
 
   else
     for(ii=0; ii<NPART; ii++){

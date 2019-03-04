@@ -6,10 +6,11 @@ typedef struct {
   float Mv,M200,Rv,Vpeak,Vmax,Mstar;
   long boxnum,str_id,id,lc_id;
   int snapnum,sel;
+  float vx,vy,vz;
 } lc_data;
 
 typedef struct {
-  float ra,dec,rds,wfkp;
+  float ra,dec,rds,wfkp,zreal;
   int sel;
 } ran_data;
 
@@ -18,6 +19,7 @@ typedef struct{
   long id,str_id,box_id;
   float zrds,Mstar;
   float x,y,z,vx,vy,vz;
+  float aux;
   float M200,Mv,Rv,Vmax,Vpeak;
 } box_data;
 
@@ -169,6 +171,7 @@ void fill_proxy_box(proxy *ham_px,box bx_cat);
 void box_selection(box box_cat);
 
 //error message functions
+void error_line_numvar(int nline, char *file);
 void error_open_file(char *fname);
 void error_line_cfile(int nline);
 void error_input_param(int nline,char *name,char *fname);

@@ -13,8 +13,8 @@
 #define DATASET "DM-lc"
 #define DATABOX "DM-HALOS"
 #define N_COL_LC_ASCII 11
-//#define N_COL_BOX_ASCII 13
-#define N_COL_BOX_ASCII 6
+#define N_COL_BOX_ASCII 13
+//#define N_COL_BOX_ASCII 6
 #define R2D 57.2957795131
 #define D2R 0.017453292519943295
 

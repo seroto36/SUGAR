@@ -20,6 +20,14 @@ void error_line_cfile(int nline){
   exit(EXIT_FAILURE);
 }
 
+void error_line_numvar(int nline, char *file){
+  fprintf(stderr,"Could not read line %d in file \"%s\"\n" 
+	  "  wrong number of columns\n"
+	  "  number of columns = 2\n"
+	  "(PROCESS ABORTED)\n\n",nline,file);
+  exit(EXIT_FAILURE);
+}
+
 void error_input_param(int nline,char *name,char *fname){
   fprintf(stderr,"Unknown parameter \"%s\" \n"
 	  "file: \"%s\" line %d\n"

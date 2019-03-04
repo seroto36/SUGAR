@@ -120,23 +120,27 @@ long count_and_sel_lc_halos(box box_cat,float min_dis,float max_dis){
       float y_rds  = box_cat.bx[ii].y+(1.0+z)*vr*LOS_y/H;
       float z_rds  = box_cat.bx[ii].z+(1.0+z)*vr*LOS_z/H;
       float rc0    = sqrt(x_rds*x_rds+y_rds*y_rds+z_rds*z_rds);
-
-      //if(rc0 < max_dis && rc0 >= min_dis){
-      if(rc < max_dis && rc >= min_dis){
+      
+      if(rc0 < max_dis && rc0 >= min_dis){
+	//if(rc < max_dis && rc >= min_dis){
 	float zobs   = dist2redshift(rc0);
 	if(ra<0.0)ra=ra+360.0;
 	/*Here, the codes modifies the arrays of boxes, these data cannot
 	  be used again to extract positions and velocities of boxes*/ 
-	box_cat.bx[ii].x  = ra;
-	box_cat.bx[ii].y  = dec;
-	box_cat.bx[ii].z  = zobs;
-	box_cat.bx[ii].vx = z;
+	box_cat.bx[ii].aux = box_cat.bx[ii].vx;
+	/*box_cat.bx[ii].M200  = box_cat.bx[ii].x;
+	box_cat.bx[ii].Rv    = box_cat.bx[ii].y;
+	box_cat.bx[ii].Vpeak = box_cat.bx[ii].z;*/
+	box_cat.bx[ii].x   = ra;
+	box_cat.bx[ii].y   = dec;
+	box_cat.bx[ii].z   = zobs;
+	box_cat.bx[ii].vx  = z;
 	box_cat.bx[ii].sel = TRUE;
 	n_lc++;
       }    
     }
   }
-  
+  fprintf(stderr,"TOTAL NUMBER OF OBJECTS %ld\n",n_lc);
   return n_lc;
 }
 
@@ -150,6 +154,9 @@ void fill_lccat(long index,int snapnum, box box_cat,lightcone lc_cat){
       lc_cat.lc[jj].dec     = box_cat.bx[ii].y;
       lc_cat.lc[jj].rds     = box_cat.bx[ii].z;
       lc_cat.lc[jj].zreal   = box_cat.bx[ii].vx;
+      /*lc_cat.lc[jj].vx      = box_cat.bx[ii].aux;
+      lc_cat.lc[jj].vy      = box_cat.bx[ii].vy;
+      lc_cat.lc[jj].vz      = box_cat.bx[ii].vz;*/
       lc_cat.lc[jj].Mv      = box_cat.bx[ii].Mv;
       lc_cat.lc[jj].Rv      = box_cat.bx[ii].Rv;
       lc_cat.lc[jj].M200    = box_cat.bx[ii].M200;

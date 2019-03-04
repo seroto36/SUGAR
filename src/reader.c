@@ -23,7 +23,7 @@ int find_maximum(double a[], double rds[], int n){
 }
 
 void split_line(int nline, char *line,char *name,
-		char *value){
+		char *value, char *file){
   
   char delims[] = " ";
   char *result = NULL; 
@@ -38,9 +38,9 @@ void split_line(int nline, char *line,char *name,
       if(var[jj-1][0]=='#')
 	break;
       else
-	error_line_cfile(nline);}
+	error_line_numvar(nline,file);}
   }
-  if(jj<2) error_line_cfile(nline);
+  if(jj<2) error_line_numvar(nline,file);
     
   strcpy(name, var[0]);
   strcpy(value, var[1]);
@@ -170,7 +170,7 @@ void read_conf_file(){
       if ((*line == '#') || (*line == '\n')){nline++; continue;}
       if(line[strlen(line) - 1] == '\n') line[strlen(line) - 1] = '\0';
       
-      split_line(nline,line,name,value);
+      split_line(nline,line,name,value,fconf);
       for(cline = 0; cline < N_VAR_LC; cline++){
 	if(!strcmp(PAR_NAME_LC[cline], name)){
 	  if(PAR_VAL_LC[cline]!=DEFAULT)
@@ -185,7 +185,6 @@ void read_conf_file(){
       }
       if(cline==N_VAR_LC)
 	error_input_param(nline,name,fconf);
-      
       nline++;
     }
 
@@ -206,7 +205,7 @@ void read_conf_file(){
       if ((*line == '#') || (*line == '\n')){nline++; continue;}
       if(line[strlen(line) - 1] == '\n') line[strlen(line) - 1] = '\0';
       
-      split_line(nline,line,name,value);
+      split_line(nline,line,name,value,fconf);
       for(cline = 0; cline < N_VAR_BX; cline++){
 	if(!strcmp(PAR_NAME_BX[cline], name)){
 	  if(PAR_VAL_BX[cline]!=DEFAULT)
@@ -232,14 +231,14 @@ void read_conf_file(){
     ini_var_conf_box(); //save results in configuration variables
     check_conf_bx();
   }
-  
+
 }
 
 void read_argc(int argc, char **argv){
 
   int n_argc=4;  
   if( argc != n_argc ) {
-    fprintf( stderr, "USAGE:\t%s BOX/LGC config_file\n", argv[0] );
+    fprintf( stderr, "USAGE:\t%s BOX/LGC config_file param_file\n", argv[0] );
     exit(EXIT_FAILURE);
   }
   if((!strcmp(argv[1],"LGC")) || (!strcmp(argv[1],"BOX"))){
@@ -261,24 +260,25 @@ void read_param_file(){
   
   if((file=fopen(fparam, "r"))==NULL)
     error_open_file(fparam);
-  
+
   while(fgets(line, sizeof(line), file) != NULL){
     if ((*line == '#') || (*line == '\n')){nline++; continue;}
     if(line[strlen(line) - 1] == '\n') line[strlen(line) - 1] = '\0';
-    
-    split_line(nline,line,name,value);
+	  
+    split_line(nline,line,name,value,fparam);
     for(cline = 0; cline < N_VAR; cline++){
       if(!strcmp(VAR_NAME[cline], name)){
-	if(VAR_VALUE[cline]!=NULL)
-	  error_repeat_param(nline, fparam, name);
+	if(VAR_VALUE[cline]!=NULL){
+	  error_repeat_param(nline, fparam, name);}
 	VAR_VALUE[cline] = malloc (CHAR_SIZE);
 	strcpy(VAR_VALUE[cline],value);
 	break;
       }
     }
+
     if(cline==N_VAR)
       error_input_param(nline,name,fparam);
-    
+
     nline++;
     
   }
@@ -332,7 +332,6 @@ void read_hdf5_box(char *fname,box *box_cat){
   
 #pragma omp parallel for shared(DIS,sig)
   for(ii=0;ii<size_cat;ii++){
-    
     (*box_cat).bx[ii].x      = DIS+sig*read_h5data[ii].x;
     (*box_cat).bx[ii].y      = DIS+sig*read_h5data[ii].y;
     (*box_cat).bx[ii].z      = DIS+sig*read_h5data[ii].z;
